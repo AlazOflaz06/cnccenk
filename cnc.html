@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>CNC Gerçekçi Animasyon</title>
+<style>
+body {
+    background: #1a1a1a;
+    color: white;
+    font-family: Arial;
+    text-align: center;
+    padding-top: 40px;
+}
+
+/* Parça (çelik görünüm) */
+#parca {
+    width: 350px;
+    height: 140px;
+    margin: 40px auto;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #666, #888, #555);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px #000 inset;
+}
+
+/* Kesme izi */
+#cut-line {
+    position: absolute;
+    width: 0;
+    height: 4px;
+    background: #0ff;
+    top: 70px;
+    left: 0;
+    box-shadow: 0 0 12px #0ff;
+    transition: width 2s linear;
+}
+
+/* CNC kafası — kare metal */
+#cnc {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(145deg, #888, #444);
+    border: 3px solid #222;
+    box-shadow: 0 0 15px #00eaff;
+    position: absolute;
+    top: -120px;
+    left: -120px;
+    border-radius: 6px;
+    animation: cncMove 4s ease forwards;
+}
+
+/* CNC Kafası hareket */
+@keyframes cncMove {
+    0%   { top: -130px; left: -130px; }
+    30%  { top: 35px; left: 140px; }  
+    60%  { top: 35px; left: 140px; }  
+    100% { top: -130px; left: 450px; } 
+}
+
+/* Kıvılcım efekti */
+.kivilcim {
+    width: 10px;
+    height: 10px;
+    background: radial-gradient(circle, #0ff, #00aaff, transparent);
+    position: absolute;
+    top: 60px;
+    left: 160px;
+    border-radius: 50%;
+    animation: spark 0.15s infinite alternate;
+    opacity: 0;
+}
+
+@keyframes spark {
+    from { transform: scale(0.3); opacity: 0.5; }
+    to   { transform: scale(1.3); opacity: 1; }
+}
+
+/* Yazı — metal kabartma */
+#yazi {
+    position: absolute;
+    width: 100%;
+    top: 40px;
+    font-size: 32px;
+    font-weight: bold;
+    opacity: 0;
+    background: linear-gradient(140deg, #d4d4d4, #aaa, #eee, #bbb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 10px #000;
+    transition: opacity 1.4s ease;
+}
+</style>
+</head>
+<body>
+
+<h2>Ustam için özel CNC işleme</h2>
+
+<div id="parca">
+    <div id="cut-line"></div>
+    <div id="yazi">Cenk Çayan</div>
+    <div id="cnc"></div>
+    <div class="kivilcim" id="spark"></div>
+</div>
+
+<script>
+// Kesme izi genişliyor
+setTimeout(() => {
+    document.getElementById("cut-line").style.width = "350px";
+}, 1500);
+
+// Kıvılcımlar başlasın
+setTimeout(() => {
+    document.getElementById("spark").style.opacity = 1;
+}, 1300);
+
+// CNC bittikten sonra yazı görünsün
+setTimeout(() => {
+    document.getElementById("yazi").style.opacity = 1;
+}, 2600);
+</script>
+
+</body>
+</html>
